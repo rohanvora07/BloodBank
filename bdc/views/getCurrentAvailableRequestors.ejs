@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+  <header class="text-grap-600 body-font bg-red-400">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center fill-red-100">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+  
+      <img src="/images/blood.JPG" width="50" height="50">
+      <span class="ml-3 text-2xl">BloodBank</span>
+    </a>
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center text-lg">
+      <a class="mr-5 hover:text-gray-900" href="/">Donor Register</a>
+      <a class="mr-5 hover:text-gray-900" href="/getSample">View Donor</a>
+      <a class="mr-5 hover:text-gray-900" href="/rec">Receiver Register</a>
+      <a class="mr-5 hover:text-gray-900" href="/accept">Accept Req</a>
+      <a class="mr-5 hover:text-gray-900" href="/requestActiveList">View Reqs</a>
+    </nav>
+    
+  </div>
+</header>
+
+<div class="flex flex-col">
+     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+       <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
+         <div class="overflow-hidden">
+           <table class="min-w-full text-center">
+             <thead class="border-b bg-gray-800">
+               <tr>
+                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                   Sr.NO
+                 </th>
+                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                   Address
+                 </th>
+                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                   Location
+                 </th>
+                 <th scope="col" class="text-sm font-medium text-white px-6 py-4">
+                   Blood Group
+                 </th>
+               </tr>
+             </thead class="border-b">
+             <tbody>
+             <% list.forEach((result,index) => {%>
+             
+               <tr class="bg-white border-b">
+                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><%= index+1 %></td>
+                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                   <%= result.requestAddress %>
+                 </td>
+                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                   <%= result.location %>
+                 </td>
+                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    <% switch(result.reqGrp) {
+                case '0':%>
+                    A+ve
+               <% break;
+                case '1':%>
+                    A-ve
+               <% break;
+                case '2':%>
+                    B+ve
+               <% break;
+                case '3':%>
+                    B-ve
+               <% break;
+                case '4':%>
+                    O+ve
+               <% break;
+               case '5':%>
+                    O-ve
+               <% break;
+               case '6':%>
+                    AB+ve
+               <% break;
+               case '7':%>
+                    AB-ve
+                    <% } %>
+
+          </td>
+     </tr class="bg-white border-b">
+     <% });%>
+
+                 
+             </tbody>
+           </table>
+         </div>
+       </div>
+       
+     </div>
+   </div>
+   

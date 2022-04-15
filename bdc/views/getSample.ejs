@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+  <body>
+  <header class="text-grap-600 body-font bg-red-400">
+    
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center fill-red-100">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      
+      <img src="/images/blood.JPG" width="50" height="50">
+      <span class="ml-3 text-2xl">BloodBank</span>
+    </a>
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center text-lg">
+        <a class="mr-5 hover:text-gray-900" href="/">Donor Register</a>
+        <a class="mr-5 hover:text-gray-900" href="/getSample">View Donor</a>
+        <a class="mr-5 hover:text-gray-900" href="/rec">Receiver Register</a>
+        <a class="mr-5 hover:text-gray-900" href="/accept">Accept Req</a>
+        <a class="mr-5 hover:text-gray-900" href="/requestActiveList">View Reqs</a>
+      </nav>
+    
+  </div>
+</header>
+<div class="h-10">
+</div>
+<div> 
+<form action="getSample" method="POST" id="getdonorForm" target="iframe_a" class="">
+
+<div class="p-2 w-100 md:flex md:justify-center mb-6">
+    <div class="relative w-2/3 content-center ">
+      <label for="text" class="leading-7 text-sm text-gray-600 ">Account address</label>
+      <input type="text" id="search" name ="search" class="w-full bg-gray-100 bg-opacity-50 rounded   focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+    </div>
+</div>
+<div class="p-2 w-100   md:flex md:justify-center mb-6">
+    <button class=" relative flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Submit</button>
+  </div>
+
+</form>
+<div class="h-10">
+</div>
+<% if(result){ %>
+    <div class="flex flex-col w-100 items-center">
+        <div class="justify-center overflow-x-auto sm:-mx-2 lg:-mx-2">
+            <div class="inline-block py-2 min-w-full sm:px-2 lg:px-2">
+                <div class="overflow-hidden shadow-md sm:rounded-lg">
+                    <table class="min-w-full">
+                        
+                        <tbody>
+                            <tr class="bg-gray-300 border-b dark:bg-gray-800 dark:border-gray-600">
+                                <td class="py-4 px-6 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Age
+                                </td>
+                                <td class="py-4 px-6 text-lg text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    <%= result._age %>
+                                </td>
+                                
+                            </tr>
+                            <tr class="bg-white border-b dark:bg-gray-700 dark:border-gray-600">
+                                <td class="py-4 px-6 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Gender
+                                </td>
+                                
+                                <td class="py-4 px-6 text-lg text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                   <% if (result._donGen == 0){%>
+                                    Male
+                                    <% }else if (result._donGen == 1){%>
+                                    Female
+                                    <% }else {%>
+                                    Other
+                                    <% }%>
+                                </td>
+                            </tr>
+                            <tr class="bg-gray-300 border-b dark:bg-gray-800 dark:border-gray-600">
+                                
+                                <td class="py-4 px-6 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Place
+                                </td>
+                                <td class="py-4 px-6 text-lg text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    <%=result._place %>
+                                </td>
+                            </tr>
+                            <tr class="bg-white border-b dark:bg-gray-700 dark:border-gray-600">
+                                
+                                <td class="py-4 px-6 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Blood Group
+                                </td>
+                                <td class="py-4 px-6 text-lg text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                    <% switch(result._grp) {
+                                     case '0':%>
+                                         A+ve
+                                    <% break;
+                                     case '1':%>
+                                         A-ve
+                                    <% break;
+                                     case '2':%>
+                                         B+ve
+                                    <% break;
+                                     case '3':%>
+                                         B-ve
+                                    <% break;
+                                     case '4':%>
+                                         O+ve
+                                    <% break;
+                                    case '5':%>
+                                         O-ve
+                                    <% break;
+                                    case '6':%>
+                                         AB+ve
+                                    <% break;
+                                    case '7':%>
+                                         AB-ve
+                                    <% } %>
+                                </td>
+                                
+                            </tr>
+                            <tr class="bg-gray-300 dark:bg-gray-800">
+                                
+                                <td class="py-4 px-6 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Medical Conditions
+                                </td>
+                                <td class="py-4 px-6 text-lg text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                   <%if (result._medCond == true){%>
+                                    Yes
+                                   <% }else{ %>
+                                   No
+                                  <%}%>
+                                </td>
+                                
+                            </tr>
+    
+                            <tr class="bg-white dark:bg-gray-800">
+                                
+                                <td class="py-4 px-6 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Availability/Status
+                                </td>
+                                <td class="py-4 px-6 text-lg text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                   <%if (result._active == false) {%>
+                                  Not Available
+                                  <% }else{ %>
+                                  Available
+                                  <%}%>
+                                </td>
+                                
+                            </tr>
+    
+                            <tr class="bg-gray-300 dark:bg-gray-800">
+                                
+                                <td class="py-4 px-6 text-lg font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    Tokens
+                                </td>
+                                <td class="py-4 px-6 text-lg text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                     <%= result.token %>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<% } %>
+
+</div>
+
+</body>
+</html>
